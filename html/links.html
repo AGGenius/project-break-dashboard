@@ -6,8 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <input type="text">
-    <input type="text">
+    <label for="linkName">¿Que titulo quieres para tu enlace?</label>
+    <input id="linkName" type="text" placeholder="titulo">
+    <br> <!-- Quitar antes de dar formato con CSS! -->
+    <label for="linkValue">Introduce un enlace para guardar.</label>
+    <input id="linkValue" type="text" placeholder="http://">
+    <p id="linkWarning"></p>
+    <main id="mainDisplay"></main>
     <script src="/js/links.js"></script>
 </body>
 </html>
