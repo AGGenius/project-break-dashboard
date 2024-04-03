@@ -1,26 +1,34 @@
 setInput();
 
+//test(1000);
+
 // Gets the DOM values. Checks for a valid input, and calls the function to generate a password if it really is. If not, displays a message on the webpage.
 function setInput() {
     const passwordInput = document.getElementById('passInput');
     const passwordInputLabel = document.getElementById('passInputLabel');
+    const passwordInputButton = document.getElementById('passInputButton');
 
-    passwordInput.addEventListener('keydown', enterPress)    
+    passwordInput.addEventListener('keydown', enterPress);
+    passwordInputButton.addEventListener('click', callGenerator);
 
     function enterPress(input) {
-        if(input.key === 'Enter') {
-            const pureValue = passwordInput.value;
-            let value = pureValue * 1;
+        if(input.key === 'Enter') { callGenerator();    }
+    }
 
-            if(typeof value === 'number' && !Number.isNaN(value) && (value >= 12 && value <= 50)) {
-                const password = setPassword(value);
-                passwordInputLabel.textContent = `"${password}`;
-            } else {
-                passwordInputLabel.textContent = `"${pureValue} is not a valid. Input a number between 12 and 50.`;
-            }
+    function callGenerator() {
+        const pureValue = passwordInput.value;
+        let value = pureValue * 1;
 
-            passwordInput.value = '';
+        if (pureValue.length > 2) {
+            passwordInputLabel.textContent = `Input value longer than two digits. Input a number between 12 and 50.`;
+        } else if(typeof value === 'number' && !Number.isNaN(value) && (value >= 12 && value <= 50)) {
+            const password = setPassword(value);
+            passwordInputLabel.textContent = `"${password}`;
+        } else {
+            passwordInputLabel.textContent = `"${pureValue}" is not a valid. Input a number between 12 and 50.`;
         }
+
+        passwordInput.value = '';
     }
 }
 
@@ -65,8 +73,8 @@ function setPassword(long) {
 }
 
 // A automatic test function to check if the password really includes all in the end.
-function test() {
-    for(let i = 0; i < 100; i++) {
+function test(x) {
+    for(let i = 0; i < x; i++) {
         const passLong = Math.floor(Math.random() * (51 - 12) + 12);
 
         const password = setPassword(passLong);
