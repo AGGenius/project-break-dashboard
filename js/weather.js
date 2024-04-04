@@ -21,6 +21,7 @@ function weatherStation() {
 
     getWeatherData(link);
     
+    // To get the data from the api.
     function getWeatherData(source) {
         fetch(source)
         .then((response) => {
@@ -39,6 +40,7 @@ function weatherStation() {
         })
     } 
 
+    // Sets the value of weather object with retrieved data.
     function setWeatherData(data) {
         weatherData.city = data.location.name; 
         weatherData.country = data.location.country;
@@ -51,6 +53,7 @@ function weatherStation() {
         weatherData.forecast = data.forecast.forecastday[0].hour;
     }
 
+    // Renders the data on the DOM.
     function renderWeatherData() {
         mainDisplay.innerHTML = `
         <article>
@@ -71,6 +74,8 @@ function weatherStation() {
 
         // Borrar este bloque de estilo provisional antes de tocar el CSS.
         forecast.style.display = 'flex';
+        forecast.style.flexDirection = 'center';
+        forecast.style.alignItem = 'center';
 
         forecastData.forEach(element => {
             const wrap = document.createElement('div');

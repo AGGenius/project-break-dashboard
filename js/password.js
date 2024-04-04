@@ -1,6 +1,6 @@
 setInput();
 
-//test(1000);
+test(100000);
 
 // Gets the DOM values. Checks for a valid input, and calls the function to generate a password if it really is. If not, displays a message on the webpage.
 function setInput() {
@@ -32,7 +32,7 @@ function setInput() {
     }
 }
 
-function setPassword(long) {
+function passwordValues() {
     const letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     const uppercases = [];
     const numbers = ['0','1','2','3','4','5','6','7','8','9',];
@@ -40,7 +40,11 @@ function setPassword(long) {
 
     letters.forEach(letter => uppercases.push(letter.toUpperCase()) )
 
-    const chars = [letters, uppercases, numbers, symbols];
+    return chars = [letters, uppercases, numbers, symbols];
+}
+
+function setPassword(long) {
+    chars = passwordValues();
 
     let password = [];
 
@@ -74,30 +78,32 @@ function setPassword(long) {
 
 // A automatic test function to check if the password really includes all in the end.
 function test(x) {
+    let ok = 0;
+    let fail = 0;
+    let failElement = [];
+
     for(let i = 0; i < x; i++) {
         const passLong = Math.floor(Math.random() * (51 - 12) + 12);
 
         const password = setPassword(passLong);
-    
-        const letters = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-        const uppercases = [];
-        const numbers = ['0','1','2','3','4','5','6','7','8','9',];
-        const symbols = ['!','@','#','$','%','^','&','*','(',')','-','_','=','+'];
-    
-        letters.forEach(letter => uppercases.push(letter.toUpperCase()) )
-    
-        const chars = [letters, uppercases, numbers, symbols];
+     
+        chars = passwordValues();
     
         chars.forEach(arr => {
             let check = false;
     
             arr.forEach(char => {
-                if(password.includes(char)) { 
-                    check = true;
-                }
+                password.includes(char) ? check = true: '';
             });   
-    
-            console.log(check);
+            
+            if(check) {
+                ok++;
+            } else {
+                fail++;
+                failElement.push(password);
+            }
         }) 
     }
+
+    console.log('ok:',ok,'fail:',fail, failElement);
 }
