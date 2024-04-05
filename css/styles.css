@@ -1,0 +1,104 @@
+* {
+    font-family: "Roboto Condensed", sans-serif;
+  }
+  
+*,*:before, *:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: white;
+}
+    
+html,body {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
+
+body {
+    background-blend-mode: overlay;
+    background-size: cover;
+    background-position: top center;  
+    background-repeat: no-repeat;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#index {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+article {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(100, 100, 100, .2);
+    border: 1px solid rgba(255, 248, 230, 0.63);
+    border-radius: 5px;
+}
+
+footer {
+    width: 100%;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    
+
+    position: absolute;
+    bottom: 1rem;
+    padding-left: 1rem;
+}
+
+footer a {
+    margin-left: .5rem;
+    font-style: italic;
+}
+
+footer a:hover {
+    color: lightblue;
+}
+
+#fade {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+#fade.in {
+    background-color: rgba(0, 0, 0, 0);
+    transition:  background-color .5s;
+}
+
+#fade.out {
+    background-color: rgba(0, 0, 0, 1);
+    transition:  background-color .5s;
+}
+
+input {
+    color:black;
+}
+
+button {
+    color:black;
+}
+
+/* Weather */
+.forecast {
+    width: 300px;
+    overflow-x: scroll;
+}
