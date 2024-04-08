@@ -385,10 +385,8 @@ function weatherStation(display) {
 
         // Borrar este bloque de estilo provisional antes de tocar el CSS.
         forecast.addEventListener('wheel', event => {
-            event.preventDefault();
-
             forecast.scrollLeft += event.deltaY;
-        })
+        }, {passive: true})
 
         forecastData.forEach(element => {
             const wrap = document.createElement('div');
@@ -529,4 +527,7 @@ function setBackground() {
 
     domFoot.append(autorRef, autorSource);
 }
+
+// Navigation feedback related -->
+
 export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground }
