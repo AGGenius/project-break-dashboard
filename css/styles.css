@@ -164,16 +164,20 @@ body {
 #mainDisplay {
     width: 100%;
     height: 100%;
-    gap: 1rem;
+    gap: .5rem 1rem; 
 
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    align-items: flex-start;
+    align-content: flex-start;
+
+    border-top: 2px solid goldenrod;
+
+    padding-top: 1rem;
 }
 
 .linkCard {
-    width: 40%;
+    width: 45%;
     height: 20%;
     gap: .3rem 0;
     
@@ -183,14 +187,34 @@ body {
     align-items: center;
 
     background-color: rgba(25, 25, 25, .4);
-    border: 2px solid goldenrod;
+    border-top: 2px solid goldenrod;
+    border-bottom: 2px solid goldenrod;
     border-radius: 5px;
 }
 
 .linkCard__delButton {
-    content:url(/resources/Pokeball-PNG-File.png);
     width: 25px;
     height: 25px;
+
+    content:url(/resources/icons/flatDark46.png);
+}
+
+.linkCard__delButton:hover {
+    content:url(/resources/icons/flatLight45.png);
+}
+
+.linkCard__link:hover {
+    color: palegoldenrod;
+}
+
+/* Weather */
+.forecast {
+    width: 300px;
+    overflow-x: scroll;
+
+    display: flex;
+    flex-direction: center;
+    align-items: center;
 }
 
 
@@ -239,31 +263,23 @@ footer a:hover {
     color: lightblue;
 }
 
+/* fading background */
+
 #fade {
     background-color: rgba(255, 255, 255, 1);
 }
 
 #fade.in {
     background-color: rgba(0, 0, 0, 0);
-    transition:  background-color .5s;
+    transition:  background-color .7s;
 }
 
 #fade.out {
     background-color: rgba(0, 0, 0, 1);
-    transition:  background-color .5s;
+    transition:  background-color .7s;
 }
 
 input {
     color:black;
-}
-
-/* Weather */
-.forecast {
-    width: 300px;
-    overflow-x: scroll;
-
-    display: flex;
-    flex-direction: center;
-    align-items: center;
 }
 

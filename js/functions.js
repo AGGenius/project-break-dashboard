@@ -148,12 +148,15 @@ function displayLinks(links) {
         linkCard.className = 'linkCard';
         linkDelButton.className = 'linkCard__delButton';
     
-        linkTittle.textContent = 'Tittle: ' + cutText(link.tittle);
+        linkTittle.textContent = cutText(link.tittle);
         linkTittle.title = link.tittle;
-        linkValue.textContent = 'Link: ' + cutText(link.value);
+
+        linkValue.textContent = cutText(link.value);
         linkValue.href = link.value;
         linkValue.title = link.value;
         linkValue.target = '_blank';
+        linkValue.className = 'linkCard__link'
+
         linkDelButton.value = link.value;
     
         linkCard.append(linkTittle, linkValue, linkDelButton);
@@ -543,6 +546,7 @@ function setAutors() {
 }
 
 function setBackground() {
+    const time = 10;
     const domBack = document.querySelector('body');
     const domFoot = document.querySelector('footer');
     const autorRef = document.createElement('p');
@@ -550,10 +554,12 @@ function setBackground() {
 
     const autors = setAutors();
     selectBackground();
-    setInterval(selectBackground, 10000);
-    setInterval(fade, 9700);
+    setInterval(selectBackground, time * 1000);
 
-    function selectBackground() {    
+    function selectBackground() {  
+        const fadeInterval = setInterval(fade, (time * 1000) - 500); 
+
+        console.log('hola'); 
         domBack.classList.toggle("in");
         domBack.classList.toggle("out");
 
@@ -563,11 +569,13 @@ function setBackground() {
         autorSource.textContent = `${autors[selection].autor}`
         autorSource.href = `${autors[selection].externalLink}`
         autorSource.target = '_blank';
-    }
 
-    function fade() {
-        domBack.classList.toggle("in");
-        domBack.classList.toggle("out");
+        function fade() {
+            console.log('adios');
+            domBack.classList.toggle("in");
+            domBack.classList.toggle("out");
+            clearInterval(fadeInterval);
+        }
     }
 
     domFoot.append(autorRef, autorSource);
