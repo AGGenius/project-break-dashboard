@@ -1,12 +1,11 @@
-import { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground } from '../js/functions.js';
+import { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground, navFeedback } from '../js/functions.js';
 
-const clockDisplay = document.getElementById('watch');
-const passwordDisplay = document.getElementById('password')
-const linksDisplay = document.getElementById('links');
-const weatherDisplay = document.getElementById('weather');
+const mainDom = document.getElementById('index');
 
 setBackground();
-setClock(clockDisplay);
-setInput(passwordDisplay);
-setLinksUi(linksDisplay);
-weatherStation(weatherDisplay);
+navFeedback();
+setClock(mainDom);
+setInput(mainDom);
+setLinksUi(mainDom);
+weatherStation(mainDom);
+

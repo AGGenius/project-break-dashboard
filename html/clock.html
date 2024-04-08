@@ -7,15 +7,17 @@
     <link rel="stylesheet" href="/css/styles.css" />
 </head>
 <body>
-    <header></header>
-    <nav>
-        <a href="../html/index.html">Main</a>
-        <a href="../html/clock.html">Clock</a>
-        <a href="../html/password.html">Password</a>
-        <a href="../html/links.html">Links</a>
-        <a href="../html/weather.html">Weather</a>
+    <header></header>  
+    <nav class="mainNav">
+        <div class="mainNav__wrap">
+            <a class='nav__link nav__link--index' href="../html/index.html">Main</a>
+            <a class='nav__link nav__link--clock' href="../html/clock.html">Clock</a>
+            <a class='nav__link nav__link--password' href="../html/password.html">Password</a>
+            <a class='nav__link nav__link--links' href="../html/links.html">Links</a>
+            <a class='nav__link nav__link--weather' href="../html/weather.html">Weather</a>
+        </div>
     </nav>
-    <main></main>
+    <main id="external"></main>
     <footer></footer>
     <script src="/js/clock.js" type="module"></script>
 </body>

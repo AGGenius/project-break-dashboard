@@ -1,6 +1,7 @@
-import { weatherStation, setBackground } from '../js/functions.js';
+import { weatherStation, setBackground, navFeedback} from '../js/functions.js';
 
 const mainDisplay = document.querySelector('main');
 
 setBackground();
+navFeedback();
 weatherStation(mainDisplay);

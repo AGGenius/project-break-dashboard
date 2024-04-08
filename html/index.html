@@ -8,18 +8,16 @@
 </head>
 <body>
     <header></header>
-    <nav>
-        <a href="../html/clock.html">Clock</a>
-        <a href="../html/password.html">Password</a>
-        <a href="../html/links.html">Links</a>
-        <a href="../html/weather.html">Weather</a>
+    <nav class="mainNav">
+        <div class="mainNav__wrap">
+            <a class='nav__link nav__link--index' href="../html/index.html">Main</a>
+            <a class='nav__link nav__link--clock' href="../html/clock.html">Clock</a>
+            <a class='nav__link nav__link--password' href="../html/password.html">Password</a>
+            <a class='nav__link nav__link--links' href="../html/links.html">Links</a>
+            <a class='nav__link nav__link--weather' href="../html/weather.html">Weather</a>
+        </div>
     </nav>
-    <main id="index">
-        <article id="watch"></article>
-        <article id="weather"></article>
-        <article id="password"></article>
-        <article id="links"></article>
-    </main>
+    <main id="index"></main>
     <footer></footer>   
     <script src="/js/index.js" type="module"></script>
 </body>

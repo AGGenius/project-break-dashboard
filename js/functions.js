@@ -1,13 +1,17 @@
 // Clock related -->
+
 function setClock(display) {
+    const clockArticle = document.createElement('article');
     const clockDom = document.createElement('h1');
     const dateDom = document.createElement('h2');
     const phraseDom = document.createElement('h3');
+    clockArticle.id = 'watch';
     clockDom.id = 'clock';
     dateDom. id = 'date';
     phraseDom.id = 'phrase';
 
-    display.append(clockDom, dateDom, phraseDom);
+    clockArticle.append(clockDom, dateDom, phraseDom);
+    display.appendChild(clockArticle);
 
     getDateValues();
     setInterval(getDateValues, 1000);
@@ -47,7 +51,8 @@ function setClock(display) {
 }
 
 
-// Links related --> 
+// Links related -->
+
 // Sets the local storage for first load of webpage.
 function setLocalstorage () {
     if(localStorage.getItem('links') === null) {
@@ -58,15 +63,17 @@ function setLocalstorage () {
     }
 }
 
-function setLinksUi(dom) {
-    dom.innerHTML = `
-        <label for="linkName">¿Que titulo quieres para tu enlace?</label>
-        <input id="linkName" type="text" placeholder="titulo">
-        <br> <!-- Quitar antes de dar formato con CSS! -->
-        <label for="linkValue">Introduce un enlace para guardar.</label>
-        <input id="linkValue" type="text" placeholder="http://">
+function setLinksUi(dom) { 
+    const linkArticle = document.createElement('article');
+    linkArticle.id = 'links';
+    dom.appendChild(linkArticle);
 
-        //Añadir boton aqui//
+    linkArticle.innerHTML = `
+        <label for="linkName">Give a tittle for your link.</label>
+        <input id="linkName" type="text" placeholder="tittle">
+        <label for="linkValue">Give a link to store.</label>
+        <input id="linkValue" type="text" placeholder="http://">
+        <button id="addLinkButton">Add link</button>
 
         <p id="linkWarning"></p>
         <div id="mainDisplay"></div>
@@ -82,6 +89,7 @@ function setLinksUi(dom) {
 function getLink() {
     const linkTittle = document.getElementById('linkName');
     const linkValue = document.getElementById('linkValue');
+    const linkButton = document.getElementById('addLinkButton');
     const linkWarning = document.getElementById('linkWarning');
 
     const link = {
@@ -91,9 +99,10 @@ function getLink() {
 
     linkTittle.addEventListener('keydown', getValues);
     linkValue.addEventListener('keydown', getValues);
+    linkButton.addEventListener('click', getValues);
 
     function getValues(input) {
-        if(input.key === 'Enter') {
+        if(input.key === 'Enter' || input.type === 'click') {
             link.tittle = linkTittle.value;
             link.value = linkValue.value;
             let links = JSON.parse(localStorage.getItem('links'));
@@ -103,14 +112,14 @@ function getLink() {
             try { 
                 new URL(link.value);
             } catch (error) {
-                linkWarning.textContent = 'No es un enlace valido.'
+                linkWarning.textContent = 'Not a valid link.'
                 return false;
             }
             
             if (links.find((element) => element.value === link.value)) {
-                linkWarning.textContent = '¡Ya tienes guardado este enlace!';
+                linkWarning.textContent = 'You have stored this link already!';
             } else if (!link.tittle || !link.value) {
-                linkWarning.textContent = 'Alguno de los campos esta vacio.';
+                linkWarning.textContent = 'You left empty some input.';
             } else if (link.tittle && link.value) {     
                 links.push(link);
                 displayLinks(links);
@@ -136,20 +145,30 @@ function displayLinks(links) {
         const linkValue = document.createElement('a');
         const linkDelButton = document.createElement('img');
 
-        // Modificar este bloque desde el CSS, solo por test.
-        linkDelButton.src = '/resources/Pokeball-PNG-File.png'
-        linkDelButton.width = 25;
-        linkDelButton.height = 25;
+        linkCard.className = 'linkCard';
+        linkDelButton.className = 'linkCard__delButton';
     
-        linkTittle.textContent = 'Titulo: ' + link.tittle;
-        linkValue.textContent = 'Enlace: ' + link.value;
+        linkTittle.textContent = 'Tittle: ' + cutText(link.tittle);
+        linkTittle.title = link.tittle;
+        linkValue.textContent = 'Link: ' + cutText(link.value);
         linkValue.href = link.value;
+        linkValue.title = link.value;
         linkValue.target = '_blank';
         linkDelButton.value = link.value;
     
         linkCard.append(linkTittle, linkValue, linkDelButton);
         mainDisplay.appendChild(linkCard);
     });
+
+    function cutText(text) {
+        if(text.includes('https')) {
+            text = text.slice(8);
+        } else if(text.includes('http')) {
+            text = text.slice(7);
+        } 
+
+        return text.length > 20 ?  text.slice(0, 12) + '...' : text;
+    }
 }
 
 // Function to add a listener to the main dom to look for the del button on each card.
@@ -176,14 +195,19 @@ function delListener() {
 
 
 // Password Related -->
+
 // Gets the DOM values. Checks for a valid input, and calls the function to generate a password if it really is. If not, displays a message on the webpage.
 function setInput(domWrap) {
+    const passwordArticle = document.createElement('article');
+    passwordArticle.id = 'password';
+    domWrap.appendChild(passwordArticle);
+
     const passworTittle = document.createElement('h1');
     const passwordInput = document.createElement('input');
     const passwordInputButton = document.createElement('button');
     const passwordInputLabel = document.createElement('label');
 
-    passworTittle.innerText = 'Genera una contraseña';
+    passworTittle.innerText = 'Generate a secure password';
 
     passwordInput.id = 'passInput';
     passwordInput.name = 'passInput';
@@ -193,12 +217,13 @@ function setInput(domWrap) {
     passwordInput.value = '12';
 
     passwordInputButton.id = 'passInputButton';
-    passwordInputButton.textContent = 'Generar Contraseña';
+    passwordInputButton.textContent = 'Generate Password';
 
     passwordInputLabel.for = 'passInput';
     passwordInputLabel.id =  'passInputLabel';
+    passwordInputLabel.textContent = '';
 
-    domWrap.append(passworTittle, passwordInput, passwordInputButton, passwordInputLabel);
+    passwordArticle.append(passworTittle, passwordInput, passwordInputButton, passwordInputLabel);
 
     passwordInput.addEventListener('keydown', enterPress);
     passwordInputButton.addEventListener('click', callGenerator);
@@ -252,21 +277,37 @@ function setPassword(long) {
     return password;
 
     // This function checks the password to look if in includes at least one of each type of character, if not, includes one.
+    // The if it detects any character from the give array, and if it's true, increments the internal counter, changes the check value
+    // to true and exits the current array check.
+    // If detects no coincidence in the array, it gives a random charactar from that array to a random position.
+    // Lastly checks if cont is less than the number of arrays to check. If so, call recursively the check function.
+    // Once called recursively, the curren pasword has been already changed, so it can be it checks true alrready.
+    // If not, changes any position for a character of the array that isn't present already.
     function charCheck() {
+        let chars = passwordValues();
+        let cont = 0;
 
         chars.forEach(arr => {
             let check = false;
 
-            arr.forEach(char => {
-                if(password.includes(char)) { check = true; }
-            });   
+            arr.forEach((char, index) => {
+                if(password.includes(char)) { 
+                    check = true;
+                    cont++;
+                    arr.length = index + 1;
+                }
+            });           
     
             if(!check) {
-                const toChange = password[Math.floor(Math.random() * password.length)];
+                const changePosition = Math.floor(Math.random() * password.length);
+                const toChange = password[changePosition];
+
                 const changeValue = arr[Math.floor(Math.random() * arr.length)];
                 password.splice(password.indexOf(toChange), 1, changeValue);
             }
-        })    
+        });
+
+        if(cont < chars.length) { charCheck(); };
     }   
 }
 
@@ -313,7 +354,12 @@ function passwordTest(x) {
 
 
 // Weather related --> 
+
 function weatherStation(display) {
+    const weatherArticle = document.createElement('article');
+    weatherArticle.id = 'weather';
+    display.appendChild(weatherArticle);
+
     const weatherData = {
         city: '',
         country: '',
@@ -366,8 +412,7 @@ function weatherStation(display) {
 
     // Renders the data on the DOM.
     function renderWeatherData() {
-        display.innerHTML = `
-        <article>
+        weatherArticle.innerHTML = `
             <p>Country: ${weatherData.country}</p>
             <p>City: ${weatherData.city}</p>
             <p>Weather: ${weatherData.weather}</p>
@@ -377,7 +422,6 @@ function weatherStation(display) {
             <p>Humidity: ${weatherData.humidity} %</p>
             <p>Wind: ${weatherData.wind} km/h</p>
             <div class='forecast'></div>
-        </article>
         `;
 
         const forecast = document.querySelector('.forecast');
@@ -406,6 +450,7 @@ function weatherStation(display) {
 
 
 // Background related --> 
+
 function setAutors() {
     const autors = [
         {
@@ -528,6 +573,33 @@ function setBackground() {
     domFoot.append(autorRef, autorSource);
 }
 
+
 // Navigation feedback related -->
 
-export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground }
+function navFeedback() {
+    const linkIndex = document.querySelector('.nav__link--index');
+    const linkClock = document.querySelector('.nav__link--clock');
+    const linkPassword = document.querySelector('.nav__link--password');
+    const linkLinks = document.querySelector('.nav__link--links');
+    const linkWeather = document.querySelector('.nav__link--weather');
+    const url = document.URL;
+
+    if (url.includes('index')){
+        setAnchor(linkIndex);
+    } else if (url.includes('clock')){
+        setAnchor(linkClock);
+    } else if (url.includes('password')){
+        setAnchor(linkPassword);
+    } else if (url.includes('links')){
+        setAnchor(linkLinks);
+    } else if (url.includes('weather')){
+        setAnchor(linkWeather);
+    }
+
+    function setAnchor(element) {
+        element.classList.toggle('alreadySelected');
+        element.href = 'javaScript:void(0)';
+    }
+}
+
+export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground, navFeedback }
