@@ -8,7 +8,8 @@ function setClock(display) {
     phraseDom.id = 'phrase';
 
     display.append(clockDom, dateDom, phraseDom);
-    
+
+    getDateValues();
     setInterval(getDateValues, 1000);
 
     function getDateValues() {
@@ -64,6 +65,9 @@ function setLinksUi(dom) {
         <br> <!-- Quitar antes de dar formato con CSS! -->
         <label for="linkValue">Introduce un enlace para guardar.</label>
         <input id="linkValue" type="text" placeholder="http://">
+
+        //Añadir boton aqui//
+
         <p id="linkWarning"></p>
         <div id="mainDisplay"></div>
     `;
@@ -380,9 +384,11 @@ function weatherStation(display) {
         const forecastData = weatherData.forecast;
 
         // Borrar este bloque de estilo provisional antes de tocar el CSS.
-        forecast.style.display = 'flex';
-        forecast.style.flexDirection = 'center';
-        forecast.style.alignItem = 'center';
+        forecast.addEventListener('wheel', event => {
+            event.preventDefault();
+
+            forecast.scrollLeft += event.deltaY;
+        })
 
         forecastData.forEach(element => {
             const wrap = document.createElement('div');
