@@ -1,6 +1,8 @@
 * {
-    font-family: "Roboto Condensed", sans-serif;
-  }
+    font-family: "Gleegoo", serif;
+    font-weight: 600;
+    font-style: normal;
+}
   
 *,*:before, *:after {
     margin: 0;
@@ -25,7 +27,7 @@ body {
     background-repeat: no-repeat;
 }
 
-/* Nav --> */
+/* #region Nav --> */
 
 .mainNav {
     width: 100%;
@@ -92,15 +94,71 @@ body {
     border-left: 2px solid gainsboro;
 }
 
-/* Index */
+/* #endregion */
+
+/* #region Index --> */
 
 #index {
     width: 100%;
     height: 100%;
+    gap: 2rem;
 
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
+    align-items: flex-start;
+
+    overflow-x: scroll;
+
+    padding-top: 5rem;
+}
+
+#index::-webkit-scrollbar {
+    width: 10px;
+    border-left: 1px solid gold;
+}
+
+#index::-webkit-scrollbar-track {
+    background-image: linear-gradient(to bottom,rgba(218, 165, 32, .4), rgba(250, 250, 250, .4));
+}
+
+#index::-webkit-scrollbar-thumb {
+    background: goldenrod;
+
+    border-top: 2px solid gold;
+}
+
+#index::-webkit-scrollbar-thumb:hover {
+    background: palegoldenrod;
+}
+
+.index__section {
+    width: 30%;
+    min-width: 500px;
+    height: 80%;  
+    min-height: 700px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
+}
+
+.index__section #links{
+    width: 100%;
+    height: 100%;
+}
+
+.index__section #weather{
+    width: 100%;
+    height: 45%;
+
+    margin-top: 10rem;
+}
+
+.index__section #password, .index__section #watch {
+    width: 100%;
+    height: 30%;
 }
 
 #watch, #password, #links, #weather {
@@ -116,7 +174,7 @@ body {
     text-align: center;
 }
 
-/* Independents */
+/* #endregion */
 
 #external {
     width: 100%;
@@ -128,23 +186,49 @@ body {
     align-items: center;
 }
 
+/* #region clock --> */
+
 #watch { 
     width: 30%;
-    min-width: 450px;
-    height: 20%;
-    min-height: 150px;
-
-    gap: 1rem 0;
-}
-
-#password { 
-    width: 30%;
-    min-width: 450px;
-    height: 15%;
+    min-width: 600px;
+    height: 25%;
     min-height: 175px;
 
     gap: 1rem 0;
 }
+
+#clock {
+    font-size: 3rem;
+}
+
+#date {
+    font-size: 1.5rem;
+}
+
+/* #endregion */
+
+/* #region password --> */
+
+#password { 
+    width: 30%;
+    min-width: 450px;
+    height: 25%;
+    min-height: 175px;
+
+    gap: 1rem 0;
+}
+
+.password__tittle {
+    font-size: 1.8rem;
+}
+
+#passInputLabel {
+    font-size: 1.3rem;
+}
+
+/* #endregion */
+
+/* #region links --> */
 
 #links { 
     width: 30%;
@@ -161,6 +245,10 @@ body {
     padding-top: 1rem;
 }
 
+.link__text {
+    font-size: 1.3rem;
+}
+
 #mainDisplay {
     width: 100%;
     height: 100%;
@@ -170,15 +258,40 @@ body {
     flex-wrap: wrap;
     justify-content: center;
     align-content: flex-start;
+    overflow-y: scroll;
 
     border-top: 2px solid goldenrod;
+    background-image: linear-gradient(to bottom,rgba( 50, 50, 50, .5), rgba(250, 250, 250, .4));
+    border-radius: 0 0 15px 0;
 
     padding-top: 1rem;
+}
+
+#mainDisplay::-webkit-scrollbar {
+    width: 10px;
+    border-left: 1px solid gold;
+}
+
+#mainDisplay::-webkit-scrollbar-track {
+    background-image: linear-gradient(to bottom,rgba(218, 165, 32, .4), rgba(250, 250, 250, .4));
+    border-radius: 0 0 15px 0;
+}
+
+#mainDisplay::-webkit-scrollbar-thumb {
+    background: goldenrod;
+
+    border-top: 2px solid gold;
+    border-radius: 0 0 15px 0;
+}
+
+#mainDisplay::-webkit-scrollbar-thumb:hover {
+    background: palegoldenrod;
 }
 
 .linkCard {
     width: 45%;
     height: 20%;
+    min-height: 100px;
     gap: .3rem 0;
     
     display: flex;
@@ -207,23 +320,114 @@ body {
     color: palegoldenrod;
 }
 
-/* Weather */
+/* #endregion */
+
+/* #region Weather --> */
+
+#weather {
+    width: 30%;
+    min-width: 450px;
+    height: 35%;
+    min-height: 300px;
+}
+
+.weather__wrap {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.weather__location, .weather__climate, .weather__info {
+    width: 30%;
+    height: 100%;
+    gap: 2.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.weather__location span, .weather__climate span, .weather__info  span{
+    font-weight: 600;
+}
+
+.weather__climate {
+    gap: 0;
+
+    border-left: 2px solid goldenrod;
+    border-right: 2px solid goldenrod;
+}
+
+.weather__info {
+    gap: 1rem;
+}
+
 .forecast {
-    width: 300px;
+    width: 100%;
+    height: 100%;
+    gap: 0 1.5rem;
+
     overflow-x: scroll;
 
     display: flex;
     flex-direction: center;
     align-items: center;
+
+    border-top: 2px solid goldenrod;
+    
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
 
+.forecast::-webkit-scrollbar {
+    height: 12px;
+}
 
-/* Buttons */
+.forecast::-webkit-scrollbar-track {
+    background-image: linear-gradient(to right,rgba(218, 165, 32, .4), rgba(250, 250, 250, .4));
+    border-radius: 0 0 15px 15px;
+}
+
+.forecast::-webkit-scrollbar-thumb {
+    background: goldenrod;
+
+    border-top: 2px solid gold;
+    border-radius: 0 0 15px 15px;
+}
+
+.forecast::-webkit-scrollbar-thumb:hover {
+    background: palegoldenrod;
+}
+
+.forecast__card {
+    width: 20%;
+    min-width: 80px;
+    height: 80%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgba(50, 50, 50, .4);
+    border-left: 2px solid goldenrod;
+    border-right: 2px solid goldenrod;
+    border-radius: 5px;
+}
+
+/* #endregion */
+
+/* #region Buttons --> */
 button {
     background-color: rgba(25, 25, 25, .4);
     border: 2px solid transparent;
     border-radius: 5px;
 
+    font-size: 1rem;
     font-weight: 600;
     color: rgb(235, 233, 217);
 
@@ -236,7 +440,30 @@ button:hover {
     background-color: rgba(150, 150, 150, .4);
 }
 
-/* footer */
+/* #endregion */
+
+/* #region Inputs --> */
+input {
+    color: rgb(150, 17, 23);
+    font-weight: 700;
+    background-image: linear-gradient(to right,rgba(218, 165, 32, 0.8), rgba(238, 232, 170, 0.8));
+    border: 2px solid none;
+
+    padding: .2rem;
+}
+
+::placeholder {
+    color: rgba(150, 17, 23, .5);
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    opacity: 1;
+}
+
+/* #endregion */
+
+/* #region footer --> */
 
 footer {
     width: 20%;
@@ -263,7 +490,9 @@ footer a:hover {
     color: lightblue;
 }
 
-/* fading background */
+/* #endregion */
+
+/* #region fading background --> */
 
 #fade {
     background-color: rgba(255, 255, 255, 1);
@@ -279,7 +508,5 @@ footer a:hover {
     transition:  background-color .7s;
 }
 
-input {
-    color:black;
-}
+/* #endregion */
 

@@ -18,9 +18,9 @@ function setClock(display) {
 
     function getDateValues() {
         const date = new Date();
-         
+        
         clockDom.innerHTML = format(date.getHours()) + ":" + format(date.getMinutes()) + ":" + format(date.getSeconds());
-        dateDom.innerHTML = format(date.getDay()) + "/" +  format(date.getMonth()) + "/" + date.getFullYear();
+        dateDom.innerHTML = format(date.getDate()) + "/" +  format(date.getMonth() + 1) + "/" + date.getFullYear();
         phraseDom.innerHTML = customPhrase();
         
         function customPhrase() {
@@ -28,19 +28,19 @@ function setClock(display) {
             const minute = format(date.getMinutes());
     
             if(hour >= 0 && hour < 7) {
-                return 'Espero que si sigues aqui sea jugando.';
+                return "I hope that if you are still here it's playing.";
             } else if (hour >= 7&& hour < 12) {
-                return '¡Toca ponerse manos a la obra!';
+                return "¡It's time to start working!";
             } else if (hour >= 12&& hour < 14)  {
-                return 'Ves pensando que toca comer. ¡Ese cerebro no vive del aire!';
+                return "Start thinking what you want to eat. That brain don't live from air!";
             } else if (hour >= 14 && hour < 16)  {
-                return 'Un buen reposo es lo mejor poder rendir correctamente.';
+                return "A good rest is the best to keep going on fine.";
             } else if (hour >= 16 && hour < 18)  {
-                return '¿Nos ponemos un rato más? ¡Tu puedes!';
+                return "A little more? Go on!";
             } else if (hour >= 18 && hour < 22)  {
-                return '¿Sabes? Descansar de vez en cuando también va bien.';
+                return "You know? Stoping it's a good thing too.";
             } else if (hour >= 22)  {
-                return 'No me obliges a progamar una apagado automatico. A dormir.';
+                return "Don't make me program an automatic shutoff! Go to sleep.";
             } else {
                 return '';
             }
@@ -69,13 +69,13 @@ function setLinksUi(dom) {
     dom.appendChild(linkArticle);
 
     linkArticle.innerHTML = `
-        <label for="linkName">Give a tittle for your link.</label>
+        <label for="linkName" class="link__text">Give a tittle for your link.</label>
         <input id="linkName" type="text" placeholder="tittle">
-        <label for="linkValue">Give a link to store.</label>
+        <label for="linkValue" class="link__text">Give a link to store.</label>
         <input id="linkValue" type="text" placeholder="http://">
         <button id="addLinkButton">Add link</button>
 
-        <p id="linkWarning"></p>
+        <p id="linkWarning" class="link__text"></p>
         <div id="mainDisplay"></div>
     `;
 
@@ -210,6 +210,7 @@ function setInput(domWrap) {
     const passwordInputButton = document.createElement('button');
     const passwordInputLabel = document.createElement('label');
 
+    passworTittle.classList = 'password__tittle'
     passworTittle.innerText = 'Generate a secure password';
 
     passwordInput.id = 'passInput';
@@ -237,16 +238,21 @@ function setInput(domWrap) {
 
     function callGenerator() {
         const pureValue = passwordInput.value;
+        let password;
         let value = pureValue * 1;
 
         if (pureValue.length > 2) {
             passwordInputLabel.textContent = `Input value longer than two digits. Input a number between 12 and 50.`;
         } else if(typeof value === 'number' && !Number.isNaN(value) && (value >= 12 && value <= 50)) {
-            const password = setPassword(value);
+            password = setPassword(value);
             passwordInputLabel.textContent = `${password}`;
         } else {
             passwordInputLabel.textContent = `"${pureValue}" is not a valid. Input a number between 12 and 50.`;
         }
+
+        passwordInputLabel.addEventListener('click', event => {
+            navigator.clipboard.writeText(password);
+        })
 
         passwordInput.value = 12;
     }
@@ -416,15 +422,23 @@ function weatherStation(display) {
     // Renders the data on the DOM.
     function renderWeatherData() {
         weatherArticle.innerHTML = `
-            <p>Country: ${weatherData.country}</p>
-            <p>City: ${weatherData.city}</p>
-            <p>Weather: ${weatherData.weather}</p>
-            <img src='${weatherData.img}'/>
-            <p>Temperature: ${weatherData.temperature} ºC</p>
-            <p>Precipitations: ${weatherData.precipitations} mm</p>
-            <p>Humidity: ${weatherData.humidity} %</p>
-            <p>Wind: ${weatherData.wind} km/h</p>
-            <div class='forecast'></div>
+            <div class="weather__wrap">
+                <section class="weather__location"> 
+                    <p><span>Country:</span> ${weatherData.country}</p>
+                    <p><span>City:</span> ${weatherData.city}</p>
+                </section>
+                <section class="weather__climate">
+                    <p><span>Weather:</span> ${weatherData.weather}</p>
+                    <img src='${weatherData.img}'/>
+                    <p><span>Temperature:</span> ${weatherData.temperature} ºC</p>
+                </section>
+                <section class="weather__info">
+                    <p><span>Precipitations:</span> ${weatherData.precipitations} mm</p>
+                    <p><span>Humidity:</span> ${weatherData.humidity} %</p>
+                    <p><span>Wind:</span> ${weatherData.wind} km/h</p>
+                </section>
+            </div>
+            <section class='forecast'></section>
         `;
 
         const forecast = document.querySelector('.forecast');
@@ -436,7 +450,8 @@ function weatherStation(display) {
         }, {passive: true})
 
         forecastData.forEach(element => {
-            const wrap = document.createElement('div');
+            const wrap = document.createElement('article');
+            wrap.className = 'forecast__card';
             const hour = document.createElement('p');
             const img = document.createElement('img');
             const temp = document.createElement('p');
@@ -559,7 +574,6 @@ function setBackground() {
     function selectBackground() {  
         const fadeInterval = setInterval(fade, (time * 1000) - 500); 
 
-        console.log('hola'); 
         domBack.classList.toggle("in");
         domBack.classList.toggle("out");
 
@@ -571,7 +585,6 @@ function setBackground() {
         autorSource.target = '_blank';
 
         function fade() {
-            console.log('adios');
             domBack.classList.toggle("in");
             domBack.classList.toggle("out");
             clearInterval(fadeInterval);
