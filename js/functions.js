@@ -470,89 +470,91 @@ function weatherStation(display) {
 // Background related --> 
 
 function setAutors() {
+    const basePath = '../resources/background/';
+
     const autors = [
         {
             source: 'alphacoders',
             autor: 'Andrea Pipar',
             img: 'resources/background/alphacoders_Andrea-Piparo.jpg',
-            externalLink: 'https://www.artstation.com/andreapiparo'
+            externalLink: basePath + 'andreapiparo'
         }, 
         {
             source: 'alphacoders',
             autor: 'Arvalis',
-            img: 'resources/background/alphacoders_arvalis.jpg',
+            img: basePath + 'alphacoders_arvalis.jpg',
             externalLink: 'https://www.deviantart.com/arvalis/subscriptions?tier=82-890597716'
         }, 
         {
             source: 'alphacoders',
             autor: 'Duong ct',
-            img: 'resources/background/alphacoders_Duong-ct.jpg',
+            img: basePath + 'alphacoders_Duong-ct.jpg',
             externalLink: 'https://www.artstation.com/duongct'
         }, 
         {
             source: 'alphacoders',
             autor: 'Eddie Deasy',
-            img: 'resources/background/alphacoders_Eddie-Deasy.jpg',
+            img: basePath + 'alphacoders_Eddie-Deasy.jpg',
             externalLink: 'https://www.deviantart.com/drfaustus3'
         }, 
         {
             source: 'alphacoders',
             autor: 'Eryk Szczygieł',
-            img: 'resources/background/alphacoders_Eryk-Szczygieł.jpg',
+            img: basePath + 'alphacoders_Eryk-Szczygieł.jpg',
             externalLink: 'https://www.artstation.com/typhonart'
         }, 
         {
             source: 'alphacoders',
             autor: 'Julian Calle',
-            img: 'resources/background/alphacoders_Julian-Calle.jpg',
+            img: basePath + 'alphacoders_Julian-Calle.jpg',
             externalLink: 'https://www.artstation.com/handsdigitalstudio'
         }, 
         {
             source: 'alphacoders',
             autor: 'Nick Deligaris',
-            img: 'resources/background/alphacoders_Nick-Deligaris.jpg',
+            img: basePath + 'alphacoders_Nick-Deligaris.jpg',
             externalLink: 'https://www.deviantart.com/deligaris'
         }, 
         {
             source: 'alphacoders',
             autor: 'Philipp A. Urlich',
-            img: 'resources/background/alphacoders_Philipp-A.Urlich.jpg',
+            img: basePath + 'alphacoders_Philipp-A.Urlich.jpg',
             externalLink: 'https://www.artstation.com/somartist'
         }, 
         {
             source: 'alphacoders',
             autor: 'robokoto',
-            img: 'resources/background/alphacoders_Nick-Deligaris.jpg',
+            img: basePath + 'alphacoders_Nick-Deligaris.jpg',
             externalLink: 'https://alphacoders.com/users/profile/69089/robokoboto'
         }, 
         {
             source: 'alphacoders',
             autor: 'robokoto',
-            img: 'resources/background/alphacoders_robokoboto_2.png',
+            img: basePath + 'alphacoders_robokoboto_2.png',
             externalLink: 'https://alphacoders.com/users/profile/69089/robokoboto'
         }, 
         {
             source: 'alphacoders',
             autor: 'Sandara',
-            img: 'resources/background/alphacoders_sandara.jpg',
+            img: basePath + 'alphacoders_sandara.jpg',
             externalLink: 'https://www.artstation.com/sandara'
         }, 
         {
             source: 'alphacoders',
             autor: 'Stefan Koidl',
-            img: 'resources/background/alphacoders_Stefan-Koidl.jpg',
+            img: basePath + 'alphacoders_Stefan-Koidl.jpg',
             externalLink: 'https://www.artstation.com/stefankoidl'
         }, 
         {
             source: 'alphacoders',
             autor: 'Victor Sales',
-            img: 'resources/background/alphacoders_Victor-Sales.jpg',
+            img: basePath + 'alphacoders_Victor-Sales.jpg',
             externalLink: 'https://www.deviantart.com/vsales'
         }, 
         {
             source: 'alphacoders',
             autor: 'Arucarrd',
-            img: 'resources/background/alphacoders-arucarrd.png',
+            img: basePath + 'alphacoders-arucarrd.png',
             externalLink: 'https://www.deviantart.com/arucarrd'
         }, 
     ];
