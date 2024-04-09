@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clock</title>
+    <title>Index</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Glegoo:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css"/>
 </head>
 <body id="fade" class="out">
-    <header></header>  
+    <header></header>
     <nav class="mainNav">
         <div class="mainNav__wrap">
             <a class='nav__link nav__link--index' href="index.html">Main</a>
@@ -20,8 +20,12 @@
             <a class='nav__link nav__link--weather' href="weather.html">Weather</a>
         </div>
     </nav>
-    <main id="external"></main>
-    <footer></footer>
-    <script src="../js/clock.js" type="module"></script>
+    <main id="index">
+        <section id="indexFirst" class="index__section"></section>
+        <section id="indexCenter" class="index__section"></section>
+        <section id="indexLast" class="index__section"></section>
+    </main>
+    <footer></footer>   
+    <script src="../js/index.js" type="module"></script>
 </body>
 </html>

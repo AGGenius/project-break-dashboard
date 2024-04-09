@@ -476,8 +476,8 @@ function setAutors() {
         {
             source: 'alphacoders',
             autor: 'Andrea Pipar',
-            img: 'resources/background/alphacoders_Andrea-Piparo.jpg',
-            externalLink: basePath + 'andreapiparo'
+            img: basePath + 'alphacoders_Andrea-Piparo.jpg',
+            externalLink: 'https://www.artstation.com/andreapiparo'
         }, 
         {
             source: 'alphacoders',
