@@ -158,6 +158,7 @@ body {
 
 .index__section #password, .index__section #watch {
     width: 100%;
+    min-width: 100%;
     height: 30%;
 }
 
@@ -265,6 +266,7 @@ body {
     border-radius: 0 0 15px 0;
 
     padding-top: 1rem;
+    padding-bottom: 1rem;
 }
 
 #mainDisplay::-webkit-scrollbar {
@@ -325,7 +327,7 @@ body {
 /* #region Weather --> */
 
 #weather {
-    width: 30%;
+    width: 35%;
     min-width: 450px;
     height: 35%;
     min-height: 300px;
@@ -474,6 +476,7 @@ footer {
     align-items: center;
     
     position: absolute;
+    z-index: -1;
 
     background-image: linear-gradient(to right, rgba( 25, 25, 25, .6), rgb(255, 255, 255, 0));
     bottom: 1rem;
@@ -510,3 +513,163 @@ footer a:hover {
 
 /* #endregion */
 
+@media (max-width:500px) {
+    /* #region nav --> */
+
+    .mainNav {
+        width: 100%;
+        height: 60px;
+    }
+
+    .mainNav__wrap {
+        width: 100%;
+        min-width: 100%;
+        height: 100%;
+        gap: 0;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+    
+        background-color: rgba( 50, 50, 50, .4);
+        border: 2px solid goldenrod;
+        border-radius: 0;
+    }
+    
+    .mainNav a:hover, .mainNav a:active  {
+        color: palegoldenrod;
+    }
+    
+    .nav__link {
+        width: 90%;
+        height: 100%;
+        padding-bottom: .2rem;
+    }
+
+    .nav__link.alreadySelected:first-child {
+        border-radius: 0;
+    }
+    
+    .nav__link.alreadySelected:last-child {
+        border-radius: 0;
+    }
+
+    /*  #endregion */
+    
+    /* #region index --> */
+
+    .index__section {
+        width: 90%;
+        min-width: 90%;
+        height: 110%;  
+        min-height: 110%;
+    }
+
+    .index__section:first-child {
+        height: 70%;  
+        min-height: 70%;
+    }
+
+    .index__section:last-child {
+        height: 45%;  
+        min-height: 45%;
+    }
+
+    .index__section #weather{
+        margin-top: 0;
+    }
+
+    /* #endregion */
+
+    /* #region clock --> */
+
+    #watch { 
+        width: 90%;
+        min-width: 90%;
+        height: 30%;
+        min-height: 200px;
+        gap: 0;
+    }
+
+    #external #watch {
+        margin-bottom: 5rem;
+    }
+
+    /* #endregion */
+
+    /* #region password --> */
+
+    #password { 
+        width: 90%;
+        min-width: 90%;
+        height: 30%;
+        min-height: 200px;
+        gap: 1.5rem 0;
+
+        margin-bottom: 5rem;
+    }
+
+    .password__tittle {
+        font-size: 1.5rem;
+    }
+
+    #passInputLabel {
+        font-size: 1.3rem;
+    }
+
+    /* #endregion */
+
+    /* #region links --> */
+
+    #links { 
+        width: 90%;
+        min-width: 90%;
+    }
+
+    #external #links {
+        margin-bottom: 5rem;
+    }
+
+    /* #endregion */
+
+    /* #region weather --> */
+
+    #weather {
+        width: 90%;
+        min-width: 90%;
+        height: 60%;
+        min-height: 60%;
+    }
+
+    #external #weather {
+        margin-bottom: 5rem;
+    }
+    
+    .weather__wrap {
+        width: 100%;
+        height: 70%;
+    
+        flex-direction: column;
+    }
+    
+    .weather__location, .weather__climate, .weather__info {
+        width: 100%;
+        height: 33%;
+        gap: 0;
+
+        justify-content: space-around;
+    }
+    
+    .weather__climate {
+        border-top: 2px solid goldenrod;
+        border-bottom: 2px solid goldenrod;
+        border-left: none;
+        border-right: none;
+    }
+
+    .forecast {
+        height: 30%;
+    }
+    /* #endregion */
+}
