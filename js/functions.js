@@ -367,25 +367,14 @@ function passwordTest(x) {
 
 // #region Weather related --> 
 
-function weatherStation(display) {
+function weatherStation(display, searchedCity) {
     const weatherArticle = document.createElement('article');
     weatherArticle.id = 'weather';
     display.appendChild(weatherArticle);
 
-    const weatherData = {
-        city: '',
-        country: '',
-        weather: '',
-        img: '',
-        temperature: '',
-        precipitations: '',
-        humidity: '',
-        wind: '',
-        forecast: {}
-    }
-
+    let city;
     const key = '6eaad4d899a24149a05110251240304';
-    const city = 'Madrid';
+    searchedCity ? city = searchedCity : city = 'Madrid';
     const link = `https://api.weatherapi.com/v1/forecast.json?key=${key}&q=${city}&aqi=no`;
 
     getWeatherData(link);
@@ -400,9 +389,8 @@ function weatherStation(display) {
                 return response.json();
             }
         })
-        .then((data) => {
-            setWeatherData(data);
-            renderWeatherData();
+        .then((data) => {            
+            renderWeatherData(setWeatherData(data));
         })
         .catch((error) => {
             console.log('Error: '+ error);
@@ -411,6 +399,18 @@ function weatherStation(display) {
 
     // Sets the value of weather object with retrieved data.
     function setWeatherData(data) {
+        const weatherData = {
+            city: '',
+            country: '',
+            weather: '',
+            img: '',
+            temperature: '',
+            precipitations: '',
+            humidity: '',
+            wind: '',
+            forecast: {}
+        }
+
         weatherData.city = data.location.name; 
         weatherData.country = data.location.country;
         weatherData.weather = data.current.condition.text;
@@ -420,36 +420,39 @@ function weatherStation(display) {
         weatherData.humidity = data.current.humidity;
         weatherData.wind = data.current.wind_kph;
         weatherData.forecast = data.forecast.forecastday[0].hour;
+
+        return weatherData; 
     }
 
+
     // Renders the data on the DOM.
-    function renderWeatherData() {
+    function renderWeatherData(values) {
         weatherArticle.innerHTML = `
             <div class="weather__wrap">
                 <section class="weather__location"> 
-                    <p><span>Country:</span> ${weatherData.country}</p>
-                    <p><span>City:</span> ${weatherData.city}</p>
+                    <p><span>Country:</span> ${values.country}</p>
+                    <p><span>City:</span> ${values.city}</p>
                 </section>
                 <section class="weather__climate">
-                    <p><span>Weather:</span> ${weatherData.weather}</p>
-                    <img src='${weatherData.img}'/>
-                    <p><span>Temperature:</span> ${weatherData.temperature} ºC</p>
+                    <p><span>Weather:</span> ${values.weather}</p>
+                    <img src='${values.img}'/>
+                    <p><span>Temperature:</span> ${values.temperature} ºC</p>
                 </section>
                 <section class="weather__info">
-                    <p><span>Precipitations:</span> ${weatherData.precipitations} mm</p>
-                    <p><span>Humidity:</span> ${weatherData.humidity} %</p>
-                    <p><span>Wind:</span> ${weatherData.wind} km/h</p>
+                    <p><span>Precipitations:</span> ${values.precipitations} mm</p>
+                    <p><span>Humidity:</span> ${values.humidity} %</p>
+                    <p><span>Wind:</span> ${values.wind} km/h</p>
                 </section>
             </div>
             <section class='forecast'></section>
         `;
 
-        const forecast = document.querySelector('.forecast');
-        const forecastData = weatherData.forecast;
+        const forecast = document.querySelectorAll('.forecast');
+        const validForecastData = forecast[forecast.length - 1];
+        const forecastData = values.forecast;
 
-        // Borrar este bloque de estilo provisional antes de tocar el CSS.
-        forecast.addEventListener('wheel', event => {
-            forecast.scrollLeft += event.deltaY;
+        validForecastData.addEventListener('wheel', event => {
+            validForecastData.scrollLeft += event.deltaY;
         }, {passive: true})
 
         forecastData.forEach(element => {
@@ -464,7 +467,7 @@ function weatherStation(display) {
             temp.textContent = element.temp_c + ' ºC';
 
             wrap.append(hour, img, temp);
-            forecast.appendChild(wrap);
+            validForecastData.appendChild(wrap);
         });
     }
 }

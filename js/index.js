@@ -9,6 +9,18 @@ navFeedback();
 setLinksUi(firstDom);
 setClock(centerDom);
 setSearchbar(centerDom);
-weatherStation(centerDom);
+setLocalstorage();
 setInput(lastDom);
+
+function setLocalstorage() {
+    let country = 'madrid-spain';
+
+    if(localStorage.getItem('storedCountry') === null) {
+        localStorage.setItem('storedCountry', JSON.stringify());
+    } else {
+        country = JSON.parse(localStorage.getItem('storedCountry')); 
+    }
+   
+    weatherStation(centerDom, country);
+}
 
