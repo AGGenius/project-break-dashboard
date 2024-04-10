@@ -1,0 +1,55 @@
+.googlesearch {
+    position: relative; 
+    width: 40%;
+    float: right;
+    top: 4px;
+    margin-right: 5px;
+}
+
+#___gcse_0 {
+    width: 80%;
+    height: 60%;
+}
+    
+.cse .gsc-control-cse, .gsc-control-cse {   
+    background-color: transparent;
+    border-radius: 15px;
+    border: 0px;
+    
+    padding: 0em;
+}
+
+.gsc-input-box {
+    width: 80%;
+
+    color: rgb(150, 17, 23);
+    font-weight: 700;
+    background-image: linear-gradient(to right,rgba(218, 165, 32, 0.8), rgba(238, 232, 170, 0.8));
+}
+
+.gsc-search-box {
+    margin: 0 !important;
+}
+
+.gsc-input {
+    background-color: transparent !important;
+}
+
+.gsc-search-button-v2 {
+    background-color: rgba(25, 25, 25, .4);
+    border: 2px solid transparent;
+    border-radius: 5px;
+
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(235, 233, 217);
+}
+
+.gsc-search-button-v2:hover {
+    border-top: 2px solid goldenrod;
+    border-bottom: 2px solid goldenrod;
+    border-right: none;
+    border-left: none;
+
+    background-color: rgba(150, 150, 150, .4);
+}

@@ -1,4 +1,4 @@
-// Clock related -->
+// #region Clock related -->
 
 function setClock(display) {
     const clockArticle = document.createElement('article');
@@ -50,8 +50,9 @@ function setClock(display) {
     }
 }
 
+// #endregion
 
-// Links related -->
+// #region Links related -->
 
 // Sets the local storage for first load of webpage.
 function setLocalstorage () {
@@ -196,8 +197,9 @@ function delListener() {
     })
 }
 
+// #endregion
 
-// Password Related -->
+// #region Password Related -->
 
 // Gets the DOM values. Checks for a valid input, and calls the function to generate a password if it really is. If not, displays a message on the webpage.
 function setInput(domWrap) {
@@ -361,8 +363,9 @@ function passwordTest(x) {
     console.log('ok:',ok,'fail:',fail, failArr);
 }
 
+// #endregion
 
-// Weather related --> 
+// #region Weather related --> 
 
 function weatherStation(display) {
     const weatherArticle = document.createElement('article');
@@ -466,8 +469,9 @@ function weatherStation(display) {
     }
 }
 
+// #endregion
 
-// Background related --> 
+// #region Background related --> 
 
 function setAutors() {
     const basePath = '../resources/background/';
@@ -596,8 +600,9 @@ function setBackground() {
     domFoot.append(autorRef, autorSource);
 }
 
+// #endregion
 
-// Navigation feedback related -->
+// #region Navigation feedback related -->
 
 function navFeedback() {
     const linkIndex = document.querySelector('.nav__link--index');
@@ -625,4 +630,21 @@ function navFeedback() {
     }
 }
 
-export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground, navFeedback }
+// #endregion
+
+// Search engine Google --> 
+
+function setSearchbar(dom) {
+    const searchBar = document.createElement('article');
+    searchBar.className = 'searchEngine';
+
+    searchBar.innerHTML = `<style type="text/css">
+    
+    </style>
+    <div class="gcse-search"></div>
+    `;
+
+    dom.append(searchBar);
+}
+
+export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground, navFeedback, setSearchbar }
