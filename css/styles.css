@@ -593,8 +593,8 @@ footer a:hover {
     }
 
     .index__section--short {
-        height: 60%;  
-        min-height: 60%;
+        height: 50%;  
+        min-height: 50%;
     }
 
     .index__section #weather{
@@ -626,8 +626,8 @@ footer a:hover {
     #password { 
         width: 90%;
         min-width: 90%;
-        height: 20%;
-        min-height: 150px;
+        height: 100%;
+        min-height: 200px;
         gap: 1.5rem 0;
     }
 
