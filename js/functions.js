@@ -427,6 +427,9 @@ function weatherStation(display, searchedCity) {
 
     // Renders the data on the DOM.
     function renderWeatherData(values) {
+
+        const forecast = document.querySelectorAll('.forecast');
+
         weatherArticle.innerHTML = `
             <div class="weather__wrap">
                 <section class="weather__location"> 
@@ -444,11 +447,10 @@ function weatherStation(display, searchedCity) {
                     <p><span>Wind:</span> ${values.wind} km/h</p>
                 </section>
             </div>
-            <section class='forecast'></section>
+            <section id='forecast${forecast.length}' class='forecast''></section>
         `;
 
-        const forecast = document.querySelectorAll('.forecast');
-        const validForecastData = forecast[forecast.length - 1];
+        const validForecastData = document.getElementById(`forecast${forecast.length}`)
         const forecastData = values.forecast;
 
         validForecastData.addEventListener('wheel', event => {
@@ -468,6 +470,225 @@ function weatherStation(display, searchedCity) {
 
             wrap.append(hour, img, temp);
             validForecastData.appendChild(wrap);
+        });
+    }
+}
+
+// To check for a search value and display the ones the user select. Can select a favourite to display on main page and remove them.
+function weatherStationSearch(domElement) {
+    const storedWeather = document.createElement('section');
+    const input = document.createElement('input');
+    const resultBox = document.createElement('div');
+
+    const baseDom = domElement;
+
+    renderSearch(baseDom);
+    setListener(baseDom);
+    setLocalstorage();
+
+    // Sets local storage for first load and changes the webpage once it retrieves values.
+    function setLocalstorage () {
+
+        // To search for previously saved locations. Loads the stored cards and weather reports.
+        if(localStorage.getItem('storedWeather') === null) {
+            localStorage.setItem('storedWeather', JSON.stringify([]));
+        } else {
+
+            const archived = JSON.parse(localStorage.getItem('storedWeather'));
+            
+            if(archived) {
+                archived.forEach(element => {
+                    setStoredCard(element);
+                    weatherStation(baseDom, element);
+                })
+            }
+        }
+
+        // To search if had a selected country. Sets the card as selected if it's true.
+        if(localStorage.getItem('storedCountry') === null) {
+            localStorage.setItem('storedCountry', JSON.stringify(''));
+        } else {    
+            const countryCardArr = document.querySelectorAll('.weather__country__card');
+
+            let archived = JSON.parse(localStorage.getItem('storedCountry')); 
+
+            countryCardArr.forEach(element => {
+                if (element.textContent === archived) element.classList.toggle('selected');
+            })
+        }
+    }
+
+    // Renders the base elements and the search button. 
+    // Ads the listener to the search input that will output search values over two characters long.
+    // The api doesn't return any value shorter than that and we reduce requests to the api.
+    function renderSearch(dom){
+        storedWeather.className = 'search__cards';
+        input.className = 'search__input';
+        resultBox.className = 'search__result';
+    
+        input.type = 'text';
+        input.placeholder = 'Search for a city.';
+
+        dom.append(storedWeather, input, resultBox);
+    
+        input.addEventListener('input', event => {
+            const value = input.value;
+    
+            if(value.length > 2) { 
+                resultBox.style.display = 'flex';
+                getWeatherData(value);
+            }
+        })
+    }
+    
+    // To get the data from the api with the values from the search bar.
+    // Once we have a valid response we call for the render function on values to display, with the values asigned on
+    // "getLocations" with the api data.
+    function getWeatherData(searchVal) {
+        const key = '6eaad4d899a24149a05110251240304';
+        const searchValue = searchVal;
+        const link = `https://api.weatherapi.com/v1/search.json?key=${key}&q=${searchValue}`;
+
+        fetch(link)
+        .then((response) => {
+            if(!response.ok) {  console.log("Error: " + response.status);  }
+            else {  return response.json(); }
+        })
+        .then((data) => {   renderLocationsData(getLocations(data));    })
+        .catch((error) => { console.log('Error: '+ error);  })
+    } 
+
+    // The function returns an array of objects with the values of city and country given by the api.
+    // This values are feeded to "renderLocationsData".
+    function getLocations(data) {
+        const locationsArr = [];
+
+        data.forEach(element => {
+
+            const location = {
+                city: '',
+                country: ''
+            }
+
+            location.city = element.name;
+            location.country = element.country;
+
+            locationsArr.push(location);
+        });
+
+        return locationsArr;
+    }
+
+
+    // Renders the data on the DOM with the values returned from "getLocations". Refresh the content on each call of function.
+    function renderLocationsData(values) {
+        resultBox.innerHTML = '';
+
+        values.forEach(element => {
+            const country = document.createElement('p');
+
+            country.className = 'country__result';
+            country.value = element.city + '-' + element.country;
+            country.textContent = element.city + ' from ' + element.country;
+
+            resultBox.append(country);
+        });
+    }
+
+    // Sets the cards to delete a weather card or select one to display on index page.
+    // Asigns value to DOM elements to ease further search of values to compare.
+    function setStoredCard(value) {
+        const card = document.createElement('article');
+        const delButton = document.createElement('img');
+
+        card.className = 'weather__country__card';
+        card.textContent = value;
+
+        delButton.value = value;
+
+        card.append(delButton);
+        storedWeather.append(card);
+    }
+
+    // To set the various listener needed.
+    function setListener(domElement) {
+        // Listener to select a country weather to add on the display.
+        resultBox.addEventListener('click', event => {   
+            const searchCountry = event.target.closest('p');
+
+            let archived = JSON.parse(localStorage.getItem('storedWeather'));
+    
+            // Doesn't execute this if detects nothing or if has that city-country.
+            if (!searchCountry || archived.includes(searchCountry.value)) return;
+
+            archived.push(searchCountry.value);
+            localStorage.setItem('storedWeather', JSON.stringify(archived)); 
+                
+            weatherStation(domElement, searchCountry.value);
+            setStoredCard(searchCountry.value);
+                
+            //restart search values.
+            resultBox.style.display = 'none';
+            resultBox.innerHTML = '';
+            input.value = '';
+        });
+
+        // Remove a weather card and his display on the webpage. Removes it from localStorage, both the general list
+        // and the selected card to show on main.
+        domElement.addEventListener('click', event => {           
+            const targetCountry = event.target.closest('img');
+            const countryCardArr = document.querySelectorAll('.weather__country__card');
+    
+            if (!targetCountry) return;
+
+            //Local storage for saved countries. Gets the value, filters, and saves the new.              
+            let archivedCountrieCards = JSON.parse(localStorage.getItem('storedWeather'));
+            archivedCountrieCards = archivedCountrieCards.filter((val) => val !== targetCountry.value);
+            localStorage.setItem('storedWeather', JSON.stringify(archivedCountrieCards));   
+            
+            //Local storage for selected country. 
+            let archivedCountry = JSON.parse(localStorage.getItem('storedCountry')); 
+
+            domElement.innerHTML = '';
+
+            renderSearch(baseDom);
+
+            storedWeather.innerHTML = '';
+
+            countryCardArr.forEach(element => {
+                if (element.textContent === archivedCountry) {        
+                    element.classList.remove('selected');
+                    localStorage.setItem('storedCountry', JSON.stringify(''));
+                }
+            })
+
+            archivedCountrieCards.forEach(element => {
+                setStoredCard(element);
+                weatherStation(domElement, element);
+            })
+        });
+
+        // To show a selected country of the already selected values. This will be displayed on main webpage.
+        domElement.addEventListener('click', event => {         
+            const countryCard = event.target.closest('.weather__country__card');
+            const targetCountry = event.target.closest('img');
+
+            if (!countryCard || targetCountry) return;
+
+            const countryCardArr = document.querySelectorAll('.weather__country__card');
+
+            countryCardArr.forEach(element => {
+                element.classList.remove('selected');
+            })
+
+            let archived = JSON.parse(localStorage.getItem('storedCountry')); 
+
+            if(countryCard.textContent === archived) {
+                localStorage.setItem('storedCountry', JSON.stringify(''));
+            } else {
+                localStorage.setItem('storedCountry', JSON.stringify(countryCard.textContent));
+                countryCard.classList.toggle('selected');  
+            }
         });
     }
 }
@@ -650,4 +871,4 @@ function setSearchbar(dom) {
     dom.append(searchBar);
 }
 
-export { setClock, setLinksUi, setInput, passwordTest, weatherStation, setBackground, navFeedback, setSearchbar }
+export { setClock, setLinksUi, setInput, passwordTest, weatherStation, weatherStationSearch, setBackground, navFeedback, setSearchbar }

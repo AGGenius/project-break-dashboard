@@ -317,14 +317,6 @@ body {
     content:url(../resources/icons/flatDark46.png);
 }
 
-.linkCard__delButton:hover {
-    content:url(../resources/icons/flatLight45.png);
-}
-
-.linkCard__link:hover {
-    color: palegoldenrod;
-}
-
 /* #endregion */
 
 /* #region Weather --> */
@@ -414,9 +406,6 @@ body {
     padding-left: .2rem;
 }
 
-.weather__country__card img:hover {
-    content:url(../resources/icons/flatLight45.png);
-}
 
 .search__input {
     border: 2px solid goldenrod;
@@ -445,10 +434,6 @@ body {
 
 .country__result {
     width: 100%;
-}
-
-.country__result:hover {
-    background-color: rgba( 150, 150, 150, .5);
 }
 
 .weather__wrap {
@@ -571,11 +556,7 @@ button {
     padding: .4rem;
 }
 
-button:hover {
-    border-top: 2px solid goldenrod;
-    border-bottom: 2px solid goldenrod;
-    background-color: rgba(150, 150, 150, .4);
-}
+
 
 /* #endregion */
 
@@ -835,11 +816,41 @@ footer a:hover {
     /* #endregion */
 }
 
-@media (min-width: 600px) {
+@media (min-width: 500px) {
+    /* weather */
     .weather__country__card:hover {  
         background-color: rgba( 150, 150, 150, .5);  
         border-top: 2px solid rgba(245, 245, 245, 0.7);
         border-bottom: 2px solid rgba(245, 245, 245, 0.7);
+    }
+    
+    .weather__country__card img:hover {
+        content:url(../resources/icons/flatLight45.png);
+    }   
+
+    .country__result:hover {
+        background-color: rgba( 150, 150, 150, .5);
+    }
+
+    /* links */
+    .linkCard__delButton:hover {
+        content:url(../resources/icons/flatLight45.png);
+    }
+    
+    .linkCard__link:hover {
+        color: palegoldenrod;
+    }
+
+    /* buttons */
+    button:hover {
+        border-top: 2px solid goldenrod;
+        border-bottom: 2px solid goldenrod;
+        background-color: rgba(150, 150, 150, .4);
+    }
+    
+    /* footer */
+    footer a:hover {
+        color: lightblue;
     }
 }
 
