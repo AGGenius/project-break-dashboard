@@ -42,14 +42,27 @@
 
     font-size: 1rem;
     font-weight: 600;
-    color: rgb(235, 233, 217);
 }
 
 .gsc-search-button-v2:hover {
     border-top: 2px solid goldenrod;
     border-bottom: 2px solid goldenrod;
-    border-right: none;
-    border-left: none;
+    border-right: transparent;
+    border-left: transparent;
 
     background-color: rgba(150, 150, 150, .4);
+}
+
+.gsc-completion-container {
+    background-color: rgba(100, 100, 100, .8);
+    border: 1px solid goldenrod;
+}
+
+.gsc-completion-selected:hover {
+    background-color: rgba(150, 150, 150, .4);
+}
+
+.gsc-modal-background-image-visible {
+    background-color: rgba(100, 100, 100, .8);
+
 }
