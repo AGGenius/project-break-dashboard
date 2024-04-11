@@ -13,7 +13,7 @@ setLocalstorage();
 setInput(lastDom);
 
 function setLocalstorage() {
-    const country = 'madrid-spain';
+    let country = 'madrid-spain';
 
     if(localStorage.getItem('storedCountry') === null) {
         localStorage.setItem('storedCountry', JSON.stringify(''));

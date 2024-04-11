@@ -405,12 +405,6 @@ body {
     background-color: rgba( 25, 25, 25, .5);
 }
 
-.weather__country__card:hover {  
-    background-color: rgba( 150, 150, 150, .5);  
-    border-top: 2px solid rgba(245, 245, 245, 0.7);
-    border-bottom: 2px solid rgba(245, 245, 245, 0.7);
-}
-
 .weather__country__card img {
     width: 25px;
     height: 25px;
@@ -800,13 +794,6 @@ footer a:hover {
         min-height: 10%;
         gap: .5rem;
     }
-
-    .weather__country__card:hover {  
-        background-color: rgba( 50, 50, 50, .5);
-        border: 2px solid goldenrod;
-        border-top: none;
-        border-bottom: none;
-    }
     
     .country__result:hover {
         background-color: transparent;
@@ -846,5 +833,13 @@ footer a:hover {
     }
 
     /* #endregion */
+}
+
+@media (min-width: 600px) {
+    .weather__country__card:hover {  
+        background-color: rgba( 150, 150, 150, .5);  
+        border-top: 2px solid rgba(245, 245, 245, 0.7);
+        border-bottom: 2px solid rgba(245, 245, 245, 0.7);
+    }
 }
 
