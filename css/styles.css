@@ -352,13 +352,17 @@ body {
 
 .search__cards {
     width: 50%;
-    height: 5%;
+    min-width: 400px;
+    height: 10%;
+    min-height: 100px;
     gap: .5rem;
     
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+
+    overflow-y: scroll;
 }
 
 .search__cards::-webkit-scrollbar {
@@ -375,7 +379,7 @@ body {
     border-top: 2px solid gold;
 }
 
-.forecast::-webkit-scrollbar-thumb:hover {
+.search__cards::-webkit-scrollbar-thumb:hover {
     background: palegoldenrod;
 }
 
@@ -790,91 +794,26 @@ footer a:hover {
         margin-bottom: 5rem;
     }
     
+    /* Añadiste todo esto copiando y pegando lo base. Mirar y depurar. */
     .search__cards {
         width: 100%;
         height: auto;
         min-height: 10%;
         gap: .5rem;
-
-        overflow-y: scroll;
     }
-    
-    .weather__country__card {  
-        min-width: 150px;
-        height: 40px;;
-    
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    
+
+    .weather__country__card:hover {  
         background-color: rgba( 50, 50, 50, .5);
         border: 2px solid goldenrod;
         border-top: none;
         border-bottom: none;
-        border-radius: 5px;
-    
-        padding: .2rem;
-    }
-    
-    .weather__country__card.selected {  
-        border: 2px solid goldenrod;
-        background-color: rgba( 25, 25, 25, .5);
-    }
-    
-    .weather__country__card:hover {  
-        background-color: rgba( 150, 150, 150, .5);  
-        border-top: 2px solid rgba(245, 245, 245, 0.7);
-        border-bottom: 2px solid rgba(245, 245, 245, 0.7);
-    }
-    
-    .weather__country__card img {
-        width: 20px;
-        height: 20px;
-    
-        content:url(../resources/icons/flatDark46.png);
-    
-        padding-left: .2rem;
-    }
-    
-    .weather__country__card img:hover {
-        content:url(../resources/icons/flatLight45.png);
-    }
-    
-    .search__input {
-        border: 2px solid goldenrod;
-        border-bottom: none;
-        border-radius: 5px 5px 0 0;
-    
-        margin-top: 5rem;
-    }
-    
-    .search__result {
-        width: 30%;
-        min-width: 250px;
-        height: auto;
-    
-        display: none;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-    
-        background-color: rgba( 50, 50, 50, .5);
-        border: 2px solid goldenrod;
-        border-radius: 5px;
-        
-        padding-top: .5rem;
-    }
-    
-    .country__result {
-        width: 100%;
     }
     
     .country__result:hover {
-        background-color: rgba( 150, 150, 150, .5);
+        background-color: transparent;
     }
 
     .weather__wrap {
-        width: 100%;
         height: 70%;
     
         flex-direction: column;
@@ -898,6 +837,7 @@ footer a:hover {
     .forecast {
         height: 30%;
     }
+
     /* #endregion */
 
     /* #region SearchEngine --> */
