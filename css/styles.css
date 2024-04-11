@@ -94,6 +94,19 @@ body {
     border-left: 2px solid gainsboro;
 }
 
+.scroll__fill {
+    width: 10px;
+    height: 45px;
+
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    border-bottom: 2px solid gold;
+    background-color: goldenrod;
+}
+
 /* #endregion */
 
 /* #region Index --> */
@@ -124,7 +137,6 @@ body {
 
 #index::-webkit-scrollbar-thumb {
     background: goldenrod;
-
     border-top: 2px solid gold;
 }
 
@@ -142,6 +154,8 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    border: 2px solid red;
 }
 
 .index__section #links{
@@ -324,29 +338,30 @@ body {
 #external.weather__display {
     width: 100%;
     height: 100%;
-    overflow-x: scroll;
+    overflow-x: auto;
 
     display: flex;
     justify-content: flex-start;
     align-items: center;
 
-    padding-top: 1rem;
+    padding-bottom: 5rem;
 }
 
-#weather {
+#external #weather {
     width: 35%;
     min-width: 450px;
     height: 35%;
-    min-height: 250px;
+    min-height: 300px;
     
     margin-bottom: 2rem;
 }
 
 .search__cards {
     width: 50%;
-    min-width: 400px;
-    height: 10%;
-    min-height: 100px;
+    max-width: 400px;
+    min-width: 200px;
+    height: 20%;
+    min-height: 150px;
     gap: .5rem;
     
     display: flex;
@@ -355,23 +370,29 @@ body {
     align-items: center;
 
     overflow-y: scroll;
+
+    border-bottom: 2px solid rgba(218, 165, 32, 0.4);
+    border-left: 2px solid rgba(218, 165, 32, 0.4);
+
+    padding-top: 2rem;
 }
 
-.search__cards::-webkit-scrollbar {
-    width: 15px;
+.search__cards::-webkit-scrollbar, #external.weather__display::-webkit-scrollbar {
+    width: 10px;
+    border-left: 1px solid gold;
 }
 
-.search__cards::-webkit-scrollbar-track {
+.search__cards::-webkit-scrollbar-track, #external.weather__display::-webkit-scrollbar-track {
     background-image: linear-gradient(to right,rgba(218, 165, 32, .4), rgba(250, 250, 250, .4));
 }
 
-.search__cards::-webkit-scrollbar-thumb {
+.search__cards::-webkit-scrollbar-thumb, #external.weather__display::-webkit-scrollbar-thumb {
     background: goldenrod;
 
     border-top: 2px solid gold;
 }
 
-.search__cards::-webkit-scrollbar-thumb:hover {
+.search__cards::-webkit-scrollbar-thumb:hover, #external.weather__display::-webkit-scrollbar-thumb:hover {
     background: palegoldenrod;
 }
 
@@ -406,13 +427,12 @@ body {
     padding-left: .2rem;
 }
 
-
 .search__input {
     border: 2px solid goldenrod;
     border-bottom: none;
     border-radius: 5px 5px 0 0;
 
-    margin-top: 5rem;
+    margin-top: 3rem;
 }
 
 .search__result {
@@ -476,7 +496,8 @@ body {
     height: 100%;
     gap: 0 1.5rem;
 
-    overflow-x: scroll;
+    overflow-x: auto;
+    overflow-y: hidden;
 
     display: flex;
     flex-direction: center;
@@ -555,8 +576,6 @@ button {
 
     padding: .4rem;
 }
-
-
 
 /* #endregion */
 
@@ -670,6 +689,10 @@ footer a:hover {
     .nav__link.alreadySelected:last-child {
         border-radius: 0;
     }
+    
+    .scroll__fill {
+        display: none;
+    }
 
     /*  #endregion */
     
@@ -770,9 +793,11 @@ footer a:hover {
     }
     
     .search__cards {
-        width: 100%;
-        height: auto;
-        min-height: 10%;
+        width: 90%;
+        max-width: none;
+        min-width: 200px;
+        height: 300px;
+        min-height: 150px;
         gap: .5rem;
     }
     
