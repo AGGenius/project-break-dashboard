@@ -154,8 +154,6 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
-    border: 2px solid red;
 }
 
 .index__section #links{
