@@ -41,7 +41,7 @@ function weatherStationSearch(domElement) {
         }
 
         if(localStorage.getItem('storedCountry') === null) {
-            localStorage.setItem('storedCountry', JSON.stringify());
+            localStorage.setItem('storedCountry', JSON.stringify(''));
         } else {    
             const countryCardArr = document.querySelectorAll('.weather__country__card');
 
@@ -130,6 +130,7 @@ function weatherStationSearch(domElement) {
     }
 
     function setListener(value) {
+        // Listener to select a country weather to show.
         resultBox.addEventListener('click', event => {   
             const searchCountry = event.target.closest('p');
 
@@ -154,10 +155,9 @@ function weatherStationSearch(domElement) {
         // Remove a weather card and display.
         value.addEventListener('click', event => {           
             const targetCountry = event.target.closest('img');
+            const countryCardArr = document.querySelectorAll('.weather__country__card');
     
             if (!targetCountry) return;
-
-            const countryCardArr = document.querySelectorAll('.weather__country__card');
 
             //Local storage for saved countries. Gets the value, filters, and saves the new.              
             let archivedCountrieCards = JSON.parse(localStorage.getItem('storedWeather'));
@@ -186,6 +186,7 @@ function weatherStationSearch(domElement) {
             })
         });
 
+        // Show a country weather in main page.
         value.addEventListener('click', event => {         
             const countryCard = event.target.closest('.weather__country__card');
             const targetCountry = event.target.closest('img');

@@ -412,8 +412,8 @@ body {
 }
 
 .weather__country__card img {
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
 
     content:url(../resources/icons/flatDark46.png);
 
@@ -794,7 +794,6 @@ footer a:hover {
         margin-bottom: 5rem;
     }
     
-    /* Añadiste todo esto copiando y pegando lo base. Mirar y depurar. */
     .search__cards {
         width: 100%;
         height: auto;
