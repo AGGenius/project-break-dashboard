@@ -779,14 +779,12 @@ footer a:hover {
 
     /* #region weather --> */
 
-    #weather {
+    #external #weather {
         width: 90%;
         min-width: 90%;
         height: 80%;
         min-height: 80%;
-    }
 
-    #external #weather {
         margin-bottom: 5rem;
     }
     
